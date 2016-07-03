@@ -1,5 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <string>
+
 using namespace std;
 
 int main(int argc, char* argv[]) {
@@ -8,6 +11,13 @@ int main(int argc, char* argv[]) {
 		return 1;
 	} else {
 		cout << "Reading file...";
+		
+		ifstream file(argv[1]);
+    		string line;
+    		while (getline(file, line)) {
+        		// Process line
+    		}
+		
 		return 0;
 	}
 }
