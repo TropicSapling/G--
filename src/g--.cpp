@@ -18,33 +18,30 @@ int main(int argc, char* argv[]) {
 			string line;
 			unsigned short int i = 0;
 			while (getline(file, line)) {
-				if(line.find(string("new"))) {
-					unsigned short int ch = line.find(string("new"));
+				if(line.find("new")) {
+					unsigned short int ch = line.find("new");
 					
-					while(line.at(ch) != string("=")) {
+					while(line.at(ch) != "=") {
 						ch--;
 					}
 					ch--;
 					
-					while(line.at(ch) == string(" ")) {
+					while(line.at(ch) == " ") {
 						ch--;
 					}
 					
 					vector<string> object = {line.at(ch)};
-					while(line.at(ch) != string(" ") && ch > 0) {
+					while(line.at(ch) != " " && ch > 0) {
 						ch--;
 						object.push_back(line.at(ch));
 					}
 					
-					stringstream ss;
-					for(size_t i = 0; i < object.size(); ++i) {
-						if(i != 0) {
-							ss << ",";
-							ss << object[i];
-						}
+					stringstream strstream;
+					for(size_t i = 0; i < object.size(); i++) {
+						strstream << object[i];
 					}
 					
-					objects.push_back([ss.str(), i]);
+					objects.push_back([strstream.str(), i]);
 				}
 				i++;
 			}
