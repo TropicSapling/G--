@@ -30,18 +30,13 @@ int main(int argc, char* argv[]) {
 						ch--;
 					}
 					
-					vector<string> object = {line.at(ch)};
+					string obj = line.at(ch);
 					while(line.at(ch) != " " && ch > 0) {
 						ch--;
-						object.push_back(line.at(ch));
+						obj += line.at(ch);
 					}
 					
-					stringstream strstream;
-					for(size_t i = 0; i < object.size(); i++) {
-						strstream << object[i];
-					}
-					
-					objects.push_back([strstream.str(), i]);
+					objects.push_back([obj, i]);
 				}
 				i++;
 			}
