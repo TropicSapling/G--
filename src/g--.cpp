@@ -31,9 +31,10 @@ int main(int argc, char* argv[]) {
 					}
 					
 					string obj = line.at(ch);
-					while(line.at(ch) != " " && ch > 0) {
-						ch--;
+					ch--;
+					while(line.at(ch) != " " && line.at(ch) != ";" && ch > 0) {
 						obj += line.at(ch);
+						ch--;
 					}
 					
 					objects.push_back([obj, i]);
