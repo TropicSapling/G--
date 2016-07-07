@@ -1,4 +1,4 @@
-# G--
+# g--
 Garbage collection compiler for C++
 
 #### How to use
