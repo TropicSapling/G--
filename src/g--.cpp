@@ -19,25 +19,29 @@ int main(int argc, char* argv[]) {
 			unsigned short int i = 0;
 			while (getline(file, line)) {
 				if(line.find("new")) {
-					unsigned short int ch = line.find("new");
+					size_t ch = line.find("new");
 					
-					while(line.at(ch) != "=") {
+					if(ch != string::npos) {
+						string charAt(1, line.at(ch));
+						
+						while(charAt != "=") {
+							ch--;
+						}
 						ch--;
-					}
-					ch--;
-					
-					while(line.at(ch) == " ") {
+						
+						while(charAt == " ") {
+							ch--;
+						}
+						
+						string obj = charAt;
 						ch--;
+						while(charAt != " " && charAt != ";" && ch > 0) {
+							obj += charAt;
+							ch--;
+						}
+						
+						objects.push_back({obj, i});
 					}
-					
-					string obj = line.at(ch);
-					ch--;
-					while(line.at(ch) != " " && line.at(ch) != ";" && ch > 0) {
-						obj += line.at(ch);
-						ch--;
-					}
-					
-					objects.push_back([obj, i]);
 				}
 				i++;
 			}
