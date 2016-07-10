@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -38,6 +39,7 @@ int main(int argc, char* argv[]) {
 							ch--;
 						}
 						
+						reverse(obj.begin(), obj.end());
 						objects.push_back({obj, i});
 						cout << obj << ", ";
 						cout << i << endl;
