@@ -22,25 +22,25 @@ int main(int argc, char* argv[]) {
 					size_t ch = line.find("new");
 					
 					if(ch != string::npos) {
-						string charAt(1, line.at(ch));
-						
-						while(charAt != "=") {
+						while(string(1, line.at(ch)) != "=") {
 							ch--;
 						}
 						ch--;
 						
-						while(charAt == " ") {
+						while(string(1, line.at(ch)) == " ") {
 							ch--;
 						}
 						
-						string obj = charAt;
+						string obj = string(1, line.at(ch));
 						ch--;
-						while(charAt != " " && charAt != ";" && ch > 0) {
-							obj += charAt;
+						while(string(1, line.at(ch)) != " " && string(1, line.at(ch)) != ";" && ch > 0) {
+							obj += string(1, line.at(ch));
 							ch--;
 						}
 						
 						objects.push_back({obj, i});
+						cout << obj << ", ";
+						cout << i << endl;
 					}
 				}
 				i++;
