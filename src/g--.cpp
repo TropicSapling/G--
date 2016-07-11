@@ -23,6 +23,12 @@ int main(int argc, char* argv[]) {
 					size_t ch = line.find("new");
 					
 					if(ch != string::npos) {
+						string foundArray = "false";
+						
+						if(line.find("[]") != string::npos) {
+							foundArray = "true";
+						}
+						
 						while(string(1, line.at(ch)) != "=") {
 							ch--;
 						}
@@ -40,7 +46,7 @@ int main(int argc, char* argv[]) {
 						}
 						
 						reverse(obj.begin(), obj.end());
-						objects.push_back({obj, i});
+						objects.push_back({obj, foundArray, i});
 						cout << obj << ", ";
 						cout << i << endl;
 					}
