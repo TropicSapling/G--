@@ -8,7 +8,7 @@ using namespace std;
 
 int main(int argc, char* argv[]) {
 	if(argc < 2) {
-		cerr << string("Usage: ") + string(argv[0]) + string(" <file_name>\n");
+		cerr << string("Usage: ") + string(argv[0]) + string(" <file_name>\n") + string("Optional parameters: --debug\n");
 		return 1;
 	} else {
 		vector<string> objects;
@@ -47,8 +47,13 @@ int main(int argc, char* argv[]) {
 						
 						reverse(obj.begin(), obj.end());
 						objects.push_back({obj, foundArray, i});
-						cout << obj << ", ";
-						cout << i << endl;
+						
+						if(argv[2] == "--debug") {
+							cout << "[DEBUG] ";
+							cout << obj << ", ";
+							cout << foundArray << ", ";
+							cout << i << endl;
+						}
 					}
 				}
 				i++;
