@@ -23,10 +23,10 @@ int main(int argc, char* argv[]) {
 					size_t ch = line.find("new");
 					
 					if(ch != string::npos) {
-						string foundArray = "false";
+						string isArray = "false";
 						
 						if(line.find("[]") != string::npos) {
-							foundArray = "true";
+							isArray = "true";
 						}
 						
 						while(string(1, line.at(ch)) != "=") {
@@ -46,12 +46,12 @@ int main(int argc, char* argv[]) {
 						}
 						
 						reverse(obj.begin(), obj.end());
-						objects.push_back({obj, foundArray, i});
+						objects.push_back({obj, isArray, i});
 						
 						if(argv[2] == "--debug") {
-							cout << "[DEBUG] ";
-							cout << obj << ", ";
-							cout << foundArray << ", ";
+							cout << "[DEBUG] obj: ";
+							cout << obj << ", isArray: ";
+							cout << isArray << ", line: ";
 							cout << i << endl;
 						}
 					}
