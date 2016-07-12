@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
 				}
 				i++;
 				if(!debugMode && !hideInfo) {
-					cout << (i / file_lines) * 100 << "\%\r";
+					cout << (i / file_lines) * 100 << "%\r";
 				}
 			}
 			
