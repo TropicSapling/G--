@@ -16,12 +16,25 @@ int main(int argc, char* argv[]) {
 		
 		if(debugMode) {
 			cout << "Reading file...\n";
+		} else {
+			cout << "Reading file... ";
 		}
 		
 		ifstream file(argv[1]);
 		if(file.good()) {
 			string line;
 			unsigned short int i = 0;
+			unsigned short int file_lines = 0;
+			
+			if(!debugMode) {
+				while(getline(file, line)) {
+					i++;
+				}
+				
+				file_lines = i;
+				i = 0;
+			}
+			
 			while (getline(file, line)) {
 				if(line.find("new")) {
 					size_t ch = line.find("new");
@@ -67,6 +80,9 @@ int main(int argc, char* argv[]) {
 					}
 				}
 				i++;
+				if(!debugMode) {
+					cout << (i / file_lines) * 100 << "%\r";
+				}
 			}
 		} else {
 			cerr << "[!!] ERROR: Failed to read file. Perhaps you specified the wrong file name?\n";
