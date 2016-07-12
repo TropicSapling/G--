@@ -75,14 +75,14 @@ int main(int argc, char* argv[]) {
 					}
 				}
 					
-				for(unsigned j = 0; j < objects.size; j++) {
+				for(unsigned j = 0; j < objects.size(); j++) {
 					if(line.find(objects[j][0])) {
 						objects[j][1] = i;
 					}
 				}
 				i++;
 				if(!debugMode && !hideInfo) {
-					cout << (i / file_lines) * 100 << "%\r";
+					cout << (i / file_lines) * 100 << "\%\r";
 				}
 			}
 			
