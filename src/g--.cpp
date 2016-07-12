@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
 						reverse(obj.begin(), obj.end());
 						objects.push_back({obj, isArray, i});
 						
-						if(argv[2] == "--debug") {
+						if(argv[2] == "--debug" || argv[3] == "--debug") {
 							cout << "[DEBUG] obj: ";
 							cout << obj << ", isArray: ";
 							cout << isArray << ", line: ";
