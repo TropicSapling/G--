@@ -12,11 +12,12 @@ int main(int argc, char* argv[]) {
 		return 1;
 	} else {
 		vector<string> objects;
-		unsigned short int debugMode = argv[2] == "--debug" || argv[3] == "--debug" ? 1 : 0;
+		unsigned short int debugMode = argv[2] == "--debug" || argv[3] == "--debug" || argv[4] == "--debug" ? 1 : 0;
+		unsigned short int hideInfo = argv[2] == "--fast" || argv[3] == "--fast" || argv[4] == "--fast" ? 1 : 0;
 		
-		if(debugMode) {
+		if(debugMode && !hideInfo) {
 			cout << "Reading file...\n";
-		} else {
+		} else if(!hideInfo) {
 			cout << "Reading file... ";
 		}
 		
@@ -26,7 +27,7 @@ int main(int argc, char* argv[]) {
 			unsigned short int i = 0;
 			unsigned short int file_lines = 0;
 			
-			if(!debugMode) {
+			if(!debugMode && !hideInfo) {
 				while(getline(file, line)) {
 					i++;
 				}
@@ -80,12 +81,12 @@ int main(int argc, char* argv[]) {
 					}
 				}
 				i++;
-				if(!debugMode) {
+				if(!debugMode && !hideInfo) {
 					cout << (i / file_lines) * 100 << "%\r";
 				}
 			}
 			
-			if(!debugMode) {
+			if(!debugMode && !hideInfo) {
 				cout << endl;
 			}
 		} else {
