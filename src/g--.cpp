@@ -12,8 +12,12 @@ int main(int argc, char* argv[]) {
 		return 1;
 	} else {
 		vector<string> objects;
+		unsigned short int debugMode = argv[2] == "--debug" || argv[3] == "--debug" ? 1 : 0;
 		
-		cout << "Reading file...\n";
+		if(debugMode) {
+			cout << "Reading file...\n";
+		}
+		
 		ifstream file(argv[1]);
 		if(file.good()) {
 			string line;
@@ -48,7 +52,7 @@ int main(int argc, char* argv[]) {
 						reverse(obj.begin(), obj.end());
 						objects.push_back({obj, isArray, i});
 						
-						if(argv[2] == "--debug" || argv[3] == "--debug") {
+						if(debugMode) {
 							cout << "[DEBUG] obj: ";
 							cout << obj << ", isArray: ";
 							cout << isArray << ", line: ";
