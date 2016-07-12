@@ -84,6 +84,10 @@ int main(int argc, char* argv[]) {
 					cout << (i / file_lines) * 100 << "%\r";
 				}
 			}
+			
+			if(!debugMode) {
+				cout << endl;
+			}
 		} else {
 			cerr << "[!!] ERROR: Failed to read file. Perhaps you specified the wrong file name?\n";
 			return 1;
