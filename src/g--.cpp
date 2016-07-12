@@ -56,6 +56,12 @@ int main(int argc, char* argv[]) {
 						}
 					}
 				}
+					
+				for(j = 0; j < objects.length; j++) {
+					if(line.find(objects[j][0])) {
+						objects[j][1] = i;
+					}
+				}
 				i++;
 			}
 		} else {
