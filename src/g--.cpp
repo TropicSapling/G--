@@ -73,6 +73,8 @@ int main(int argc, char* argv[]) {
 							cout << i << endl;
 						}
 					}
+				} else if(line.find("delete") {
+					// WIP
 				}
 					
 				for(unsigned j = 0; j < objects.size(); j++) {
