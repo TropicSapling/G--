@@ -46,7 +46,7 @@ int main(int argc, char* argv[]) {
 			}
 			
 			string file_contents;
-			string isArray = "false";
+			bool objFound = false;
 			
 			while (file.get(ch)) {
 				
@@ -57,8 +57,8 @@ int main(int argc, char* argv[]) {
 				}
 				
 				if(hasEnding(file_contents, "new")) {
-					isArray = "searching";
 					unsigned short int j = i;
+					objFound = true;
 					
 					while(string(1, file_contents.at(j)) != "=") {
 						j--;
@@ -77,23 +77,24 @@ int main(int argc, char* argv[]) {
 					}
 					
 					reverse(obj.begin(), obj.end());
-					objects.push_back({obj, isArray, string(i)});
+					objects.push_back({obj, "false", string(i)});
 					
 					if(debugMode) {
 						cout << "[DEBUG] obj: ";
 						cout << obj << ", isArray: ";
-						cout << isArray << ", line: ";
+						cout << foundArray << ", line: ";
 						cout << i << "\n";
 					}
 				} else if(hasEnding(file_contents, "delete")) {
 					
-				}
-					
-/*				for(unsigned short j = 0; j < objects.size(); j++) {
-					if(line.find(objects[j][0])) {
-						objects[j][1] = i;
+				} else if(isArray == "searching") {
+					if(ch == ";") {
+						objFound = false;
+					} else if(hasEnding(file_contents, "[]")) {
+						objFound = false;
+						objects[objects.size() - 1][1] = string(i);
 					}
-				} */
+				}
 				
 				i++;
 				
