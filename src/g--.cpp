@@ -56,7 +56,38 @@ int main(int argc, char* argv[]) {
 				}
 				
 				if(hasEnding(file_contents, "new")) {
+					string isArray = "false";
 					
+/*					if(line.find("[]") != string::npos) {
+						isArray = "true";
+					} */
+					
+					while(string(1, line.at(i)) != "=") {
+						i--;
+					}
+					i--;
+					
+					while(string(1, line.at(ch)) == " ") {
+							ch--;
+						}
+						
+						string obj = string(1, line.at(ch));
+						ch--;
+						while(string(1, line.at(ch)) != " " && string(1, line.at(ch)) != ";" && ch > 0) {
+							obj += string(1, line.at(ch));
+							ch--;
+						}
+						
+						reverse(obj.begin(), obj.end());
+						objects.push_back({obj, isArray, string(i)});
+						
+						if(debugMode) {
+							cout << "[DEBUG] obj: ";
+							cout << obj << ", isArray: ";
+							cout << isArray << ", line: ";
+							cout << i << "\n";
+						}
+					}
 				} else if(hasEnding(file_contents, "delete")) {
 					
 				}
