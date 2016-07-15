@@ -8,6 +8,14 @@ using namespace std;
 
 ios_base::sync_with_stdio(false);
 
+bool hasEnding (std::string const &fullString, std::string const &ending) {
+    if (fullString.length() >= ending.length()) {
+        return (0 == fullString.compare (fullString.length() - ending.length(), ending.length(), ending));
+    } else {
+        return false;
+    }
+}
+
 int main(int argc, char* argv[]) {
 	if(argc < 2) {
 		cerr << string("Usage: ") + string(argv[0]) + string(" <file_name>\n") + string("Optional parameters: --debug\n");
@@ -45,6 +53,12 @@ int main(int argc, char* argv[]) {
 					file_contents = ch;
 				} else {
 					file_contents += ch;
+				}
+				
+				if(hasEnding(file_contents, "new")) {
+					
+				} else if(hasEnding(file_contents, "delete")) {
+					
 				}
 				
 /*				if(line.find("new")) {
