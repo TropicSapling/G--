@@ -25,21 +25,23 @@ int main(int argc, char* argv[]) {
 		
 		ifstream file(argv[1]);
 		if(file.good()) {
-			string line;
 			unsigned short int i = 0;
-			unsigned short int file_lines = 0;
+			unsigned short int file_chars = 0;
 			
 			if(!debugMode && !hideInfo) {
-				while(getline(file, line)) {
+				while(file.get(ch)) {
 					i++;
 				}
 				
-				file_lines = i;
+				file_chars = i;
 				i = 0;
 			}
 			
-			while (getline(file, line)) {
-				if(line.find("new")) {
+			while (file.get(ch)) {
+				
+				
+				
+/*				if(line.find("new")) {
 					size_t ch = line.find("new");
 					
 					if(ch != string::npos) {
@@ -83,10 +85,10 @@ int main(int argc, char* argv[]) {
 					if(line.find(objects[j][0])) {
 						objects[j][1] = i;
 					}
-				}
+				} */
 				i++;
 				if(!debugMode && !hideInfo) {
-					cout << (i / file_lines) * 100 << "%\r";
+					cout << (i / file_chars) * 100 << "%\r";
 					cout.flush();
 				}
 			}
