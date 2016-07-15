@@ -81,13 +81,13 @@ int main(int argc, char* argv[]) {
 					
 					if(debugMode) {
 						cout << "[DEBUG] obj: ";
-						cout << obj << ", isArray: ";
-						cout << foundArray << ", line: ";
+						cout << obj << ", objFound: ";
+						cout << objFound << ", char: ";
 						cout << i << "\n";
 					}
 				} else if(hasEnding(file_contents, "delete")) {
 					
-				} else if(isArray == "searching") {
+				} else if(objFound) {
 					if(ch == ";") {
 						objFound = false;
 					} else if(hasEnding(file_contents, "[]")) {
