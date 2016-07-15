@@ -37,9 +37,15 @@ int main(int argc, char* argv[]) {
 				i = 0;
 			}
 			
+			string file_contents;
+			
 			while (file.get(ch)) {
 				
-				
+				if(file_contents.length < 1) {
+					file_contents = ch;
+				} else {
+					file_contents += ch;
+				}
 				
 /*				if(line.find("new")) {
 					size_t ch = line.find("new");
