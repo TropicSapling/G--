@@ -46,6 +46,7 @@ int main(int argc, char* argv[]) {
 			}
 			
 			string file_contents;
+			string isArray = "false";
 			
 			while (file.get(ch)) {
 				
@@ -56,12 +57,7 @@ int main(int argc, char* argv[]) {
 				}
 				
 				if(hasEnding(file_contents, "new")) {
-					string isArray = "false";
-					
-/*					if(line.find("[]") != string::npos) {
-						isArray = "true";
-					} */
-
+					isArray = "searching";
 					unsigned short int j = i;
 					
 					while(string(1, file_contents.at(j)) != "=") {
@@ -93,12 +89,14 @@ int main(int argc, char* argv[]) {
 					
 				}
 					
-/*				for(unsigned j = 0; j < objects.size(); j++) {
+/*				for(unsigned short j = 0; j < objects.size(); j++) {
 					if(line.find(objects[j][0])) {
 						objects[j][1] = i;
 					}
 				} */
+				
 				i++;
+				
 				if(!debugMode && !hideInfo) {
 					cout << (i / file_chars) * 100 << "%\r";
 					cout.flush();
