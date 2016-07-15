@@ -61,32 +61,33 @@ int main(int argc, char* argv[]) {
 /*					if(line.find("[]") != string::npos) {
 						isArray = "true";
 					} */
+
+					unsigned short int j = i;
 					
-					while(string(1, line.at(i)) != "=") {
-						i--;
+					while(file_contents.at(j) != "=") {
+						j--;
 					}
-					i--;
+					j--;
 					
-					while(string(1, line.at(ch)) == " ") {
-							ch--;
-						}
-						
-						string obj = string(1, line.at(ch));
-						ch--;
-						while(string(1, line.at(ch)) != " " && string(1, line.at(ch)) != ";" && ch > 0) {
-							obj += string(1, line.at(ch));
-							ch--;
-						}
-						
-						reverse(obj.begin(), obj.end());
-						objects.push_back({obj, isArray, string(i)});
-						
-						if(debugMode) {
-							cout << "[DEBUG] obj: ";
-							cout << obj << ", isArray: ";
-							cout << isArray << ", line: ";
-							cout << i << "\n";
-						}
+					while(file_contents.at(j) == " ") {
+							j--;
+					}
+					
+					string obj = file_contents.at(j);
+					j--;
+					while(string(1, file_contents.at(j)) != " " && string(1, file_contents.at(j)) != ";" && j > 0) {
+						obj += string(1, file_contents.at(j));
+						j--;
+					}
+					
+					reverse(obj.begin(), obj.end());
+					objects.push_back({obj, isArray, string(i)});
+					
+					if(debugMode) {
+						cout << "[DEBUG] obj: ";
+						cout << obj << ", isArray: ";
+						cout << isArray << ", line: ";
+						cout << i << "\n";
 					}
 				} else if(hasEnding(file_contents, "delete")) {
 					
