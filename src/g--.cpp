@@ -6,6 +6,8 @@
 
 using namespace std;
 
+ios_base::sync_with_stdio(false);
+
 int main(int argc, char* argv[]) {
 	if(argc < 2) {
 		cerr << string("Usage: ") + string(argv[0]) + string(" <file_name>\n") + string("Optional parameters: --debug\n");
@@ -70,7 +72,7 @@ int main(int argc, char* argv[]) {
 							cout << "[DEBUG] obj: ";
 							cout << obj << ", isArray: ";
 							cout << isArray << ", line: ";
-							cout << i << endl;
+							cout << i << "\n";
 						}
 					}
 				} else if(line.find("delete") {
@@ -85,11 +87,12 @@ int main(int argc, char* argv[]) {
 				i++;
 				if(!debugMode && !hideInfo) {
 					cout << (i / file_lines) * 100 << "%\r";
+					cout.flush();
 				}
 			}
 			
 			if(!debugMode && !hideInfo) {
-				cout << endl;
+				cout << "\n";
 			}
 		} else {
 			cerr << "[!!] ERROR: Failed to read file. Perhaps you specified the wrong file name?\n";
