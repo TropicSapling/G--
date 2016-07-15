@@ -92,7 +92,7 @@ int main(int argc, char* argv[]) {
 						objFound = false;
 					} else if(hasEnding(file_contents, "[]")) {
 						objFound = false;
-						objects[objects.size() - 1][1] = string(i);
+						objects[objects.size() - 1][1] = "true";
 					}
 				}
 				
