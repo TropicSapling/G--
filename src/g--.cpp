@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
 					
 					string obj = string(1, file_contents.at(j));
 					j--;
-					while(string(1, file_contents.at(j)) != " " && string(1, file_contents.at(j)) != ";" && j >= 0) {
+					while(file_contents.at(j) != ' ' && file_contents.at(j) != ';' && j >= 0) {
 						obj += string(1, file_contents.at(j));
 						j--;
 					}
@@ -87,7 +87,7 @@ int main(int argc, char* argv[]) {
 				} else if(hasEnding(file_contents, "delete")) {
 					
 				} else if(objFound) {
-					if(ch == ";") {
+					if(ch == ';') {
 						objFound = false;
 					} else if(hasEnding(file_contents, "[]")) {
 						objFound = false;
