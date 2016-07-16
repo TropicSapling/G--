@@ -33,6 +33,7 @@ int main(int argc, char* argv[]) {
 		if(file.good()) {
 			unsigned short int i = 0;
 			unsigned short int file_chars = 0;
+			char ch;
 			
 			if(!debugMode && !hideInfo) {
 				while(file.get(ch)) {
