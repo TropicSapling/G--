@@ -54,6 +54,8 @@ int main(int argc, char* argv[]) {
 			
 			string file_contents;
 			bool objFound = false;
+			unsigned short int delState = 0;
+			string delObj;
 			
 			while (file.get(ch)) {
 				
@@ -121,7 +123,23 @@ int main(int argc, char* argv[]) {
 						cout << i << "\n";
 					}
 				} else if(hasEnding(file_contents, "delete")) {
-					// WIP
+					delState = 1;
+				} else if(delState == 1) {
+					if(ch == ' ') {
+						delState = 2;
+					}
+				} else if(delState == 2) {
+					if(ch == ';') {
+						delState = 0;
+						for(j = 0; j < objects.size(); j++) {
+							if(objects[j][0] == delObj) {
+								objects.erase(j);
+							}
+						}
+						delObj = "";
+					} else {
+						delObj += string(1, ch);
+					}
 				} else if(objFound) {
 					if(ch == ';') {
 						objFound = false;
