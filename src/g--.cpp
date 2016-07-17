@@ -117,7 +117,7 @@ int main(int argc, char* argv[]) {
 				} else if(objFound) {
 					if(ch == ';') {
 						objFound = false;
-					} else if(hasEnding(file_contents, "[]")) {
+					} else if(ch == '[') {
 						objFound = false;
 						objects[objects.size() - 1][3] = "true";
 					}
