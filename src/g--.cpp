@@ -49,7 +49,7 @@ int main(int argc, char* argv[]) {
 			
 			while (file.get(ch)) {
 				
-				if(file_contents.length < 1) {
+				if(file_contents.length() < 1) {
 					file_contents = ch;
 				} else {
 					file_contents += ch;
