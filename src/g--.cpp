@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
 		cerr << string("Usage: ") + string(argv[0]) + string(" <file_name>\n") + string("Optional parameters: --debug\n");
 		return 1;
 	} else {
-		vector<array<string, 3>> objects;
+		vector<array<string, 4>> objects;
 		unsigned short int debugMode = string(argv[2]) == "--debug" || string(argv[3]) == "--debug" || string(argv[4]) == "--debug" ? 1 : 0;
 		unsigned short int hideInfo = string(argv[2]) == "--fast" || string(argv[3]) == "--fast" || string(argv[4]) == "--fast" ? 1 : 0;
 		
@@ -76,22 +76,24 @@ int main(int argc, char* argv[]) {
 					}
 					
 					reverse(obj.begin(), obj.end());
-					objects.push_back({obj, "false", to_string(i)});
+					objects.push_back({obj, "delete", to_string(i), "false"});
 					
 					if(debugMode) {
 						cout << "[DEBUG] obj: ";
-						cout << obj << ", objFound: ";
-						cout << objFound << ", char: ";
+						cout << obj << ", type: ";
+						cout << "delete, char: ";
 						cout << i << "\n";
 					}
+				} else if(hasEnding(file_contents, "malloc")) {
+					// WIP
 				} else if(hasEnding(file_contents, "delete")) {
-					
+					// WIP
 				} else if(objFound) {
 					if(ch == ';') {
 						objFound = false;
 					} else if(hasEnding(file_contents, "[]")) {
 						objFound = false;
-						objects[objects.size() - 1][1] = "true";
+						objects[objects.size() - 1][3] = "true";
 					}
 				}
 				
