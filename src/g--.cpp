@@ -20,8 +20,8 @@ int main(int argc, char* argv[]) {
 		return 1;
 	} else {
 		vector<array<string, 3>> objects;
-		unsigned short int debugMode = argv[2] == "--debug" || argv[3] == "--debug" || argv[4] == "--debug" ? 1 : 0;
-		unsigned short int hideInfo = argv[2] == "--fast" || argv[3] == "--fast" || argv[4] == "--fast" ? 1 : 0;
+		unsigned short int debugMode = string(argv[2]) == "--debug" || string(argv[3]) == "--debug" || string(argv[4]) == "--debug" ? 1 : 0;
+		unsigned short int hideInfo = string(argv[2]) == "--fast" || string(argv[3]) == "--fast" || string(argv[4]) == "--fast" ? 1 : 0;
 		
 		if(debugMode && !hideInfo) {
 			cout << "Reading file...\n";
