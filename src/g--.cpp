@@ -85,7 +85,33 @@ int main(int argc, char* argv[]) {
 						cout << i << "\n";
 					}
 				} else if(hasEnding(file_contents, "malloc")) {
-					// WIP
+					unsigned short int j = i;
+					
+					while(string(1, file_contents.at(j)) != "=") {
+						j--;
+					}
+					j--;
+					
+					while(string(1, file_contents.at(j)) == " ") {
+							j--;
+					}
+					
+					string obj = string(1, file_contents.at(j));
+					j--;
+					while(file_contents.at(j) != ' ' && file_contents.at(j) != ';' && j >= 0) {
+						obj += string(1, file_contents.at(j));
+						j--;
+					}
+					
+					reverse(obj.begin(), obj.end());
+					objects.push_back({obj, "free", to_string(i)});
+					
+					if(debugMode) {
+						cout << "[DEBUG] obj: ";
+						cout << obj << ", type: ";
+						cout << "free, char: ";
+						cout << i << "\n";
+					}
 				} else if(hasEnding(file_contents, "delete")) {
 					// WIP
 				} else if(objFound) {
