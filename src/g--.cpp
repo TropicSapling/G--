@@ -76,7 +76,7 @@ int main(int argc, char* argv[]) {
 					}
 					
 					reverse(obj.begin(), obj.end());
-					objects.push_back({obj, "false", string(i)});
+					objects.push_back({obj, "false", to_string(i)});
 					
 					if(debugMode) {
 						cout << "[DEBUG] obj: ";
