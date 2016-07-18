@@ -122,14 +122,14 @@ int main(int argc, char* argv[]) {
 						cout << "free, char: ";
 						cout << i << "\n";
 					}
-				} else if(hasEnding(file_contents, "delete")) {
+				} else if(hasEnding(file_contents, "delete") || hasEnding(file_contents, "free(")) {
 					delState = 1;
 				} else if(delState == 1) {
 					if(ch == ' ') {
 						delState = 2;
 					}
 				} else if(delState == 2) {
-					if(ch == ';') {
+					if(ch == ';' || ch == ')') {
 						delState = 0;
 						for(j = 0; j < objects.size(); j++) {
 							if(objects[j][0] == delObj) {
