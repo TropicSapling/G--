@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
 					file_contents += ch;
 				}
 				
-				if(hasEnding(file_contents, "new")) {
+				if(hasEnding(file_contents, "new ")) {
 					unsigned short int j = i;
 					objFound = true;
 					
@@ -94,7 +94,7 @@ int main(int argc, char* argv[]) {
 						cout << "delete, char: ";
 						cout << i << "\n";
 					}
-				} else if(hasEnding(file_contents, "malloc")) {
+				} else if(hasEnding(file_contents, "malloc(")) {
 					unsigned short int j = i;
 					
 					while(string(1, file_contents.at(j)) != "=") {
