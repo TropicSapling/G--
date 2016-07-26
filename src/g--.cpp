@@ -20,15 +20,14 @@ int main(int argc, char* argv[]) {
 		return 1;
 	} else {
 		vector<array<string, 4>> objects;
+		unsigned short int debugMode = 0;
+		unsigned short int hideInfo;
 		if(argc >= 4) {
-			unsigned short int debugMode = string(argv[2]) == "--debug" || string(argv[3]) == "--debug" || string(argv[4]) == "--debug" ? 1 : 0;
-			unsigned short int hideInfo = string(argv[2]) == "--fast" || string(argv[3]) == "--fast" || string(argv[4]) == "--fast" ? 1 : 0;
+			debugMode = string(argv[2]) == "--debug" || string(argv[3]) == "--debug" || string(argv[4]) == "--debug" ? 1 : 0;
+			hideInfo = string(argv[2]) == "--fast" || string(argv[3]) == "--fast" || string(argv[4]) == "--fast" ? 1 : 0;
 		} else if(argc = 3) {
-			unsigned short int debugMode = string(argv[2]) == "--debug" || string(argv[3]) == "--debug" ? 1 : 0;
-			unsigned short int hideInfo = string(argv[2]) == "--fast" || string(argv[3]) == "--fast" ? 1 : 0;
-		} else {
-			unsigned short int debugMode = string(argv[2]) == "--debug" ? 1 : 0;
-			unsigned short int hideInfo = string(argv[2]) == "--fast" ? 1 : 0;
+			debugMode = string(argv[2]) == "--debug" || string(argv[3]) == "--debug" ? 1 : 0;
+			hideInfo = string(argv[2]) == "--fast" || string(argv[3]) == "--fast" ? 1 : 0;
 		}
 
 		if(debugMode && !hideInfo) {
@@ -131,6 +130,7 @@ int main(int argc, char* argv[]) {
 				} else if(delState == 2) {
 					if(ch == ';' || ch == ')') {
 						delState = 0;
+						unsigned short int j = 0;
 						for(j = 0; j < objects.size(); j++) {
 							if(objects[j][0] == delObj) {
 								objects.erase(j);
