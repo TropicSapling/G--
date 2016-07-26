@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
+#include <array>
 
 using namespace std;
 
@@ -16,18 +17,25 @@ bool hasEnding (std::string const &fullString, std::string const &ending) {
 
 int main(int argc, char* argv[]) {
 	if(argc < 2) {
-		cerr << string("Usage: ") + string(argv[0]) + string(" <file_name>\n") + string("Optional parameters: --debug\n");
+		cerr << string("Usage: ") + string(argv[0]) + string(" [options] <file>\n") + string("Options: \n  --help   Displays this information\n  --debug  Shows debugging information\n  --fast   Don't show any information, makes it run slightly faster\n");
 		return 1;
 	} else {
 		vector<array<string, 4>> objects;
 		unsigned short int debugMode = 0;
-		unsigned short int hideInfo;
+		unsigned short int hideInfo = 0;
 		if(argc >= 4) {
-			debugMode = string(argv[2]) == "--debug" || string(argv[3]) == "--debug" || string(argv[4]) == "--debug" ? 1 : 0;
-			hideInfo = string(argv[2]) == "--fast" || string(argv[3]) == "--fast" || string(argv[4]) == "--fast" ? 1 : 0;
-		} else if(argc = 3) {
-			debugMode = string(argv[2]) == "--debug" || string(argv[3]) == "--debug" ? 1 : 0;
-			hideInfo = string(argv[2]) == "--fast" || string(argv[3]) == "--fast" ? 1 : 0;
+			if(argc > 4) {
+				cout << "[!] Note: Unexisting argument(s) used, or argument(s) may be duplicated.\n";
+			}
+			debugMode = string(argv[1]) == "--debug" || string(argv[2]) == "--debug" ? 1 : 0;
+			hideInfo = string(argv[1]) == "--fast" || string(argv[2]) == "--fast" ? 1 : 0;
+		} else if(argc == 2 || argc == 3) {
+			debugMode = string(argv[1]) == "--debug" ? 1 : 0;
+			hideInfo = string(argv[1]) == "--fast" ? 1 : 0;
+			if(string(argv[1]) == "--help") {
+				cout << string("Usage: ") + string(argv[0]) + string(" [options] <file>\n") + string("Options: \n  --help   Displays this information\n  --debug  Shows debugging information\n  --fast   Don't show any information, makes it run slightly faster\n");
+				return 0;
+			}
 		}
 
 		if(debugMode && !hideInfo) {
@@ -36,7 +44,7 @@ int main(int argc, char* argv[]) {
 			cout << "Reading file... ";
 		}
 		
-		ifstream file(argv[1]);
+		ifstream file(argv[argc - 1]);
 		if(file.good()) {
 			unsigned short int i = 0;
 			unsigned short int file_chars = 0;
@@ -133,7 +141,7 @@ int main(int argc, char* argv[]) {
 						unsigned short int j = 0;
 						for(j = 0; j < objects.size(); j++) {
 							if(objects[j][0] == delObj) {
-								objects.erase(j);
+								objects.erase(objects.begin() + j);
 							}
 						}
 						delObj = "";
@@ -161,7 +169,11 @@ int main(int argc, char* argv[]) {
 				cout << "\n";
 			}
 		} else {
-			cerr << "[!!] ERROR: Failed to read file. Perhaps you specified the wrong file name?\n";
+			if(debugMode) {
+				cerr << "[!!] ERROR: Failed to read file. Perhaps you specified the wrong file name?\n";
+			} else {
+				cerr << "\n[!!] ERROR: Failed to read file. Perhaps you specified the wrong file name?\n";
+			}
 			return 1;
 		}
 		
