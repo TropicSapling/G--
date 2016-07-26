@@ -21,17 +21,17 @@ int main(int argc, char* argv[]) {
 		return 1;
 	} else {
 		vector<array<string, 4>> objects;
-		unsigned short int debugMode = 0;
-		unsigned short int hideInfo = 0;
+		bool debugMode = false;
+		bool hideInfo = false;
 		if(argc >= 4) {
 			if(argc > 4) {
 				cout << "[!] Note: Unexisting argument(s) used, or argument(s) may be duplicated.\n";
 			}
-			debugMode = string(argv[1]) == "--debug" || string(argv[2]) == "--debug" ? 1 : 0;
-			hideInfo = string(argv[1]) == "--fast" || string(argv[2]) == "--fast" ? 1 : 0;
+			debugMode = string(argv[1]) == "--debug" || string(argv[2]) == "--debug" ? true : false;
+			hideInfo = string(argv[1]) == "--fast" || string(argv[2]) == "--fast" ? true : false;
 		} else if(argc == 2 || argc == 3) {
-			debugMode = string(argv[1]) == "--debug" ? 1 : 0;
-			hideInfo = string(argv[1]) == "--fast" ? 1 : 0;
+			debugMode = string(argv[1]) == "--debug" ? true : false;
+			hideInfo = string(argv[1]) == "--fast" ? true : false;
 			if(string(argv[1]) == "--help") {
 				cout << string("Usage: ") + string(argv[0]) + string(" [options] <file>\n") + string("Options: \n  --help   Displays this information\n  --debug  Shows debugging information\n  --fast   Don't show any information, makes it run slightly faster\n");
 				return 0;
@@ -46,8 +46,8 @@ int main(int argc, char* argv[]) {
 		
 		ifstream file(argv[argc - 1]);
 		if(file.good()) {
-			unsigned short int i = 0;
-			unsigned short int file_chars = 0;
+			unsigned long i = 0;
+			unsigned long file_chars = 0;
 			char ch;
 			
 			if(!debugMode && !hideInfo) {
@@ -57,13 +57,18 @@ int main(int argc, char* argv[]) {
 				
 				file_chars = i;
 				i = 0;
+				file.close();
 			}
 			
 			string file_contents;
 			bool objFound = false;
-			unsigned short int delState = 0;
+			char delState = 0;
+			float prevProgress;
 			string delObj;
 			
+			if(!debugMode && !hideInfo) {
+				file.open(argv[argc - 1]);
+			}
 			while (file.get(ch)) {
 				
 				if(file_contents.length() < 1) {
@@ -73,7 +78,7 @@ int main(int argc, char* argv[]) {
 				}
 				
 				if(hasEnding(file_contents, "new ")) {
-					unsigned short int j = i;
+					unsigned long j = i;
 					objFound = true;
 					
 					while(string(1, file_contents.at(j)) != "=") {
@@ -87,7 +92,7 @@ int main(int argc, char* argv[]) {
 					
 					string obj = string(1, file_contents.at(j));
 					j--;
-					while(file_contents.at(j) != ' ' && file_contents.at(j) != ';' && j >= 0) {
+					while(file_contents.at(j) != ' ' && file_contents.at(j) != '	' && file_contents.at(j) != ';' && j >= 0) {
 						obj += string(1, file_contents.at(j));
 						j--;
 					}
@@ -98,11 +103,11 @@ int main(int argc, char* argv[]) {
 					if(debugMode) {
 						cout << "[DEBUG] obj: ";
 						cout << obj << ", type: ";
-						cout << "delete, char: ";
-						cout << i << "\n";
+						cout << "delete" << ", char: ";
+						cout << i << ", array: ";
 					}
 				} else if(hasEnding(file_contents, "malloc(")) {
-					unsigned short int j = i;
+					unsigned long j = i;
 					
 					while(string(1, file_contents.at(j)) != "=") {
 						j--;
@@ -115,7 +120,7 @@ int main(int argc, char* argv[]) {
 					
 					string obj = string(1, file_contents.at(j));
 					j--;
-					while(file_contents.at(j) != ' ' && file_contents.at(j) != ';' && j >= 0) {
+					while(file_contents.at(j) != ' ' && file_contents.at(j) != '	' && file_contents.at(j) != ';' && j >= 0) {
 						obj += string(1, file_contents.at(j));
 						j--;
 					}
@@ -151,17 +156,38 @@ int main(int argc, char* argv[]) {
 				} else if(objFound) {
 					if(ch == ';') {
 						objFound = false;
+						if(debugMode) {
+							cout << objFound << "\n";
+						}
 					} else if(ch == '[') {
 						objFound = false;
 						objects[objects.size() - 1][3] = "true";
+						if(debugMode) {
+							cout << objFound << "\n";
+						}
 					}
 				}
 				
 				i++;
 				
 				if(!debugMode && !hideInfo) {
-					cout << (i / file_chars) * 100 << "%\r";
-					cout.flush();
+					if(i / file_chars) {
+						cout << "100%\n";
+					} else {
+						float progress = round(((float)i / (float)file_chars) * 100);
+						if(progress != prevProgress) {
+							string remover = " ";
+							string mover = "\b";
+							cout << progress << "%\b";
+							for(char k = 0; k < to_string(progress).length(); k++) {
+								cout << "\b";
+								remover += " ";
+								mover += "\b";
+							}
+							cout << remover << mover;
+						}
+						prevProgress = progress;
+					}
 				}
 			}
 			
